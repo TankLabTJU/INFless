@@ -1,0 +1,36 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:31212
+functions:
+  resnet-50:
+    lang: python3-gpu
+    handler: ./resnet-50
+    image: resnet-50:latest
+    qpsPerInstance: 300
+    limits:
+      memory: 2048Mi
+      gpu_memory: 0.4
+      #gpu: 1
+    requests:
+      memory: 2048Mi
+      gpu_memory: 0.4
+      #gpu: 1
+    #constraints:
+     #- "kubernetes.io/hostname=kube-node-2"
+    labels:
+      #com.openfaas.scale.zero: "false"
+      com.openfaas.max.batch: 16
+      #com.openfaas.scale.min: 1
+      #com.openfaas.scale.max: 8
+    environment:
+      MODEL_NAME: resnet
+      MODEL_BASE_PATH: /home/app/function/models
+      BATCH_BASE_PATH: /home/app/function/batches
+      #BATCH_SIZE: 4
+      #CUDA_MPS_ACTIVE_THREAD_PERCENTAGE: 100
+    configuration:
+      copy:
+        - ./script
+        - ./models
+        - ./batches

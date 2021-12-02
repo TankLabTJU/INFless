@@ -1,0 +1,2 @@
+language: python3-gpu
+fprocess: python3 index.py

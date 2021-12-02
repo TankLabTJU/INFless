@@ -1,0 +1,9 @@
+image: openfaas/cron-connector:0.3.1
+gateway_url: http://gateway.openfaas:8080
+basic_auth: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

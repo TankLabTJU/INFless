@@ -1,0 +1,43 @@
+version: "3.3"
+services:
+    faas-idler:
+        image: openfaas/faas-idler:0.1.9
+        networks:
+            - func_functions
+        environment:
+            gateway_url: "http://gateway:8080/"
+            prometheus_host: "prometheus"
+            prometheus_port: "9090"
+            inactivity_duration: "5m"
+            reconcile_interval: "30s"
+        command: "-dry-run=false"
+        deploy:
+            resources:
+                limits:   # Enable if you want to limit memory usage
+                  memory: 50M
+                reservations:
+                  memory: 30M
+            restart_policy:
+                condition: on-failure
+                delay: 5s
+                max_attempts: 20
+                window: 380s
+            placement:
+                constraints:
+                    - 'node.platform.os == linux'
+                    - 'node.role == manager'
+        secrets:
+            - source: basic-auth-user
+              target: /var/secrets/basic-auth-user
+            - source: basic-auth-password
+              target: /var/secrets/basic-auth-password
+
+networks:
+    func_functions:
+        external: true
+
+secrets:
+    basic-auth-user:
+        external: true
+    basic-auth-password:
+        external: true

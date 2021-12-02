@@ -1,0 +1,496 @@
+version: 1.0
+cluster-capacity:
+  - node-label: kubernetes.io/hostname=kube-node-1
+    hyper-thread-offset: 40
+    cpu-thread-oversell: 0
+    gpu-core-oversell-percentage: 0
+    gpu-memory-oversell-rate: -0.1
+    gpu-capacity:
+      - cuda-device: -1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0.9
+        total-gpu-core-usage-rate: 1.0
+      - cuda-device: 0
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 2
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+    cpu-capacity:
+      - cpu-socket: 1
+        socket-core:
+          - cpu-core-index: 10
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 11
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 12
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 13
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 14
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 15
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 16
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 17
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 18
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 19
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 2
+        socket-core:
+          - cpu-core-index: 20
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 21
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 22
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 23
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 24
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 25
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 26
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 27
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 28
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 29
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 3
+        socket-core:
+          - cpu-core-index: 30
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 31
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 32
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 33
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 34
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 35
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 36
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 37
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 38
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 39
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+  - node-label: kubernetes.io/hostname=kube-node-2
+    hyper-thread-offset: 40
+    cpu-thread-oversell: 0
+    gpu-core-oversell-percentage: 0
+    gpu-memory-oversell-rate: -0.1
+    gpu-capacity:
+      - cuda-device: -1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0.9
+        total-gpu-core-usage-rate: 1.0
+      - cuda-device: 0
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 2
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+    cpu-capacity:
+      - cpu-socket: 1
+        socket-core:
+          - cpu-core-index: 10
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 11
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 12
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 13
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 14
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 15
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 16
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 17
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 18
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 19
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 2
+        socket-core:
+          - cpu-core-index: 20
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 21
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 22
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 23
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 24
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 25
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 26
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 27
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 28
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 29
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 3
+        socket-core:
+          - cpu-core-index: 30
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 31
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 32
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 33
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 34
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 35
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 36
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 37
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 38
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 39
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+            
+  - node-label: kubernetes.io/hostname=kube-node-3
+    hyper-thread-offset: 40
+    cpu-thread-oversell: 0
+    gpu-core-oversell-percentage: 0
+    gpu-memory-oversell-rate: -0.1
+    gpu-capacity:
+      - cuda-device: -1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0.9
+        total-gpu-core-usage-rate: 1.0
+      - cuda-device: 0
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 2
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+    cpu-capacity:
+      - cpu-socket: 1
+        socket-core:
+          - cpu-core-index: 10
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 11
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 12
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 13
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 14
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 15
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 16
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 17
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 18
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 19
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 2
+        socket-core:
+          - cpu-core-index: 20
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 21
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 22
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 23
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 24
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 25
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 26
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 27
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 28
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 29
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 3
+        socket-core:
+          - cpu-core-index: 30
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 31
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 32
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 33
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 34
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 35
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 36
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 37
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 38
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 39
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+
+  - node-label: kubernetes.io/hostname=kube-node-4
+    hyper-thread-offset: 40
+    cpu-thread-oversell: 0
+    gpu-core-oversell-percentage: 0
+    gpu-memory-oversell-rate: -0.1
+    gpu-capacity:
+      - cuda-device: -1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0.9
+        total-gpu-core-usage-rate: 1.0
+      - cuda-device: 0
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 1
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+      - cuda-device: 2
+        gpu-memory: 11019
+        total-func-instance: 0
+        total-gpu-memory-usage-rate: 0
+        total-gpu-core-usage-rate: 0
+    cpu-capacity:
+      - cpu-socket: 1
+        socket-core:
+          - cpu-core-index: 10
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 11
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 12
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 13
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 14
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 15
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 16
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 17
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 18
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 19
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 2
+        socket-core:
+          - cpu-core-index: 20
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 21
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 22
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 23
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 24
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 25
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 26
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 27
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 28
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 29
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+      - cpu-socket: 3
+        socket-core:
+          - cpu-core-index: 30
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 31
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 32
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 33
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 34
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 35
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 36
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 37
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 38
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0
+          - cpu-core-index: 39
+            total-func-instance: 0
+            total-cpu-core-usage-rate: 0

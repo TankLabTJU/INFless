@@ -1,0 +1,11 @@
+[[constraint]]
+  name = "github.com/openfaas/faas-provider"
+  version = "v0.15.0"
+
+[[constraint]]
+  name = "github.com/openfaas/faas"
+  version = "0.18.12"
+
+[prune]
+  go-tests = true
+  unused-packages = true
