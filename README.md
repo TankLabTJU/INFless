@@ -11,22 +11,22 @@ INFless is a domain-specific serverless platform. It caters to AI inference as B
 - scripts: Some scripts used in the evaluation.
 
 ## INFless Installation
-Deployment guide of INFless for Kubernetes is available here: https://github.com/TankLabTJU/INFless/sourceCode/README.md
+Deployment guide of INFless for Kubernetes is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode).
 
 > Notice: INFless is fully implemented with OpenFaaS, which is a serverless frameworks built with Kubernetes. The installation of INFless is similar as OpenFaaS, and **we strongly recommend you have some preliminary knowledges about OpenFaaS and understand how it works with Kubernetes**. The deployment guide of OpenFaaS for Kubernetes is available here: https://docs.openfaas.com/deployment/kubernetes/.
 
 ## Inference Function Deployment
-Guidance for function developer is available here: https://github.com/TankLabTJU/INFless/developer/README.md
+Guidance for function developer is available [here](https://github.com/TankLabTJU/INFless/tree/main/developer).
 
 Notice: Once INFless is deployed successfully, developers could use faasdev-cli tools to upload their inference functions and build them as FaaS service. 
 ## Load Generator Installation
-Guidance is available here: https://github.com/TankLabTJU/INFless/sourceCode/Java/README.md
+Guidance is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Java/LoadGen).
 
 > Notice: Be sure that the deployed inference functions and workload generator work well before evaluating INFless platform.
 
 ## Evaluation
 
-The plotting source code is available here: https://github.com/TankLabTJU/INFless/sourceCode/Matlab/README.md
+The plotting source code is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Matlab).
 
 
 ##  Bug report & Question 
