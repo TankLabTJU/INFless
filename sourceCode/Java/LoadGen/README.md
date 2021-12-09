@@ -209,8 +209,12 @@ The GUI page is shown as below:
 If you could see this page, that means the `loadGen` tool is deployed successfully.
 
 ### Step 6: Work with the LoadGenSimClient.jar 
+
+> Notice: We have prepared available bash scripts for generating workload with `LoadGenSimClient.jar` and `LoadGen`, see the [README.md](https://github.com/TankLabTJU/INFless/tree/main/workload) in directory `/INFless/workload/`. The following instructions is unnecessary to read but could help you to understand how it works.
+
 `LoadGenSimClient` is a loader simulator that generates diverse workload pattern, which is available in directory `/INFless/workload/LoadGenSimClient.jar`. 
 `LoadGenSimClient` communicates with `LoadGen` with Java RMI interface, the compiled .jar file can be used directly.
+
 
 ```bash
 $ cd workload
