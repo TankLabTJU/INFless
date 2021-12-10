@@ -1,7 +1,7 @@
 # Instructions  
 The source code of INFless implementation and evaluation consists of three parts:  
 
-1. `Go`: The source code of INFless system, which is fully implemented in [OpenFaaS](https://docs.openfaas.com/deployment/kubernetes/). OpenFaaS includes three important components: faas-cli, gateway and faas-netes. They have been modified in INFless to be highly adaptive with AI inference. Guidelines to build and install INFless are listed as below:.
+1. `Go`: The source code of INFless system, which is fully implemented in [OpenFaaS](https://docs.openfaas.com/deployment/kubernetes/). OpenFaaS includes three important components: faas-cli, gateway and faas-netes. They have been modified in INFless to be highly adaptive with AI inference. Guidelines to build and install INFless are listed as below:
 - Guideline to build and install `faasdev-cli` tool is available  [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Go/src/github.com/openfaas/faas-cli/README.md). 
 - Guideline to build and install gateway is available  [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Go/src/github.com/openfaas/faas/gateway/README.md). 
 - Guideline to build and install faas-netes is available  [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Go/src/github.com/openfaas/faas-netes/README.md). 
