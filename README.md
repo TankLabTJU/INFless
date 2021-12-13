@@ -20,13 +20,14 @@ Guidance for function developer is available [here](https://github.com/TankLabTJ
 
 Notice: Once INFless is deployed successfully, developers could use faasdev-cli tools to upload their inference functions and build them as FaaS service. 
 ## Load Generator Installation
-Guidance is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Java/LoadGen).
+Guidance to install `LoadGen` tool is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Java/LoadGen).
 
 > Notice: Be sure that the deployed inference functions and workload generator work well before evaluating INFless platform.
 
-## Evaluation
+## Result Reproduction
+We have provided a complete instructions for the evalution result reproduction, and the commands and scripts files are available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode).
 
-The plotting source code is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Matlab).
+For the paper publication, the plotting source code is available [here](https://github.com/TankLabTJU/INFless/tree/main/sourceCode/Matlab).
 
 
 ##  Bug report & Question 
