@@ -1,0 +1,17 @@
+catdog 2 0 1 22.5
+catdog 2 0 2 19.5
+catdog 2 0 4 22.5
+catdog 2 0 8 55.5
+catdog 2 0 16 60
+catdog 2 0 32 67.5
+catdog 4 0 4 16.5
+catdog 4 0 8 37.5
+catdog 4 0 16 49.5
+catdog 4 0 32 63
+catdog 8 0 8 19.695
+catdog 8 0 16 39
+catdog 8 0 32 55.5
+catdog 12 0 16 33
+catdog 12 0 32 52.965
+catdog 16 0 16 31.875
+catdog 16 0 32 48.615

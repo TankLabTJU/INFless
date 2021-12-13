@@ -95,6 +95,52 @@ $ kubectl apply -f yml/inuse
 The inference model files are stored in directory of `INFless/developer/servingFunctions/`
 ```bash
 $ cd INFless/developer/servingFunctions/
+# ssd, latency target 300ms
+$ faasdev-cli build -f ssd.yml
+$ faasdev-cli deploy -f ssd.yml
+# mobilenet, latency target 200ms
+$ faasdev-cli build -f mobilenet.yml
+$ faasdev-cli deploy -f mobilenet.yml
+# resnet-50, latency target 300ms
 $ faasdev-cli build -f resnet-50.yml
 $ faasdev-cli deploy -f resnet-50.yml
+```
+The compiled inference function images could be found like this:
+```bash
+$ docker images
+ssd  latest  b4f9dfe26b21        8 seconds ago       2.53GB
+mobilenet  latest  689b99383100        8 seconds ago       2.53GB
+resnet-50  latest  15e0e02ce887        8 seconds ago       2.53GB
+...
+```
+
+## 4. Start workload Generator
+Make sure that the `LoadGen` has been deployed in `192.168.1.109` node successfully.
+
+```bash
+# start the workload
+$ cd INFless/workload/
+$ sh start_load.sh 192.168.109 22222
+```
+## 5. Collect the system log and check result
+The INFless's runtime log can be found with `kubectl logs` command. 
+```bash
+# check the pod name of gateway component
+$ kubectl get all -n openfaasdev |grep pod/gatewaydev
+pod/gatewaydev-bdb695ff4-jdk67    2/2   Running     0    46m
+# output the log to result file
+$ kubectl logs pod/gatewaydev-bdb695ff4-jdk67 -n openfaasdev faas-netesdev >> faasnetes_result.log
+
+# parse results 
+$ sh collect_result.sh
+prefixPath:/home/tank/1_yanan/INFless/workload/
+Baseline: BATCH
+Total statistics QPS:54084
+Scaling Efficiency: 0.7703670379310474
+Throughput Efficiency: 0.0012119042210415895
+---------------------------
+Baseline: INFless
+Total statistics QPS:11967
+Scaling Efficiency: 0.8333333333333334
+Throughput Efficiency: 0.0019974242290713607
 ```

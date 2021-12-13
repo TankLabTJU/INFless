@@ -1,0 +1,14 @@
+pod/resnet50-n1-t2-g-1-s0-m0-b1-qx2-qi1-0510800764      1/1     Terminating   0          36m
+pod/resnet50-n1-t2-g-1-s0-m0-b1-qx2-qi1-1374581974      1/1     Terminating   0          38m
+pod/resnet50-n1-t2-g-1-s0-m0-b1-qx2-qi1-6411562422      1/1     Terminating   0          36m
+pod/resnet50-n1-t2-g-1-s0-m0-b1-qx2-qi1-7677566596      1/1     Terminating   0          36m
+pod/resnet50-n1-t2-g0-s10-m19-b2-qx12-qi10-3151629432   1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g0-s10-m19-b2-qx12-qi10-5811920640   1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g0-s10-m19-b2-qx12-qi10-8939778026   1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g0-s20-m19-b2-qx15-qi9-3090624566    1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g1-s10-m19-b2-qx12-qi10-0929520691   1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g1-s10-m19-b2-qx12-qi10-1854020073   1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g1-s10-m19-b2-qx12-qi10-4094199534   1/1     Terminating   0          37m
+pod/resnet50-n1-t2-g1-s10-m19-b2-qx12-qi10-9620247320   1/1     Terminating   0          36m
+pod/resnet50-n1-t2-g2-s10-m19-b2-qx12-qi10-1386838319   1/1     Terminating   0          36m
+pod/resnet50-n1-t2-g2-s10-m19-b2-qx12-qi10-7031466202   1/1     Terminating   0          36m

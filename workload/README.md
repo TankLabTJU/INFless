@@ -15,7 +15,7 @@ Before using the script, make sure that two prefix steps have been done:
 ### Check IP address
 The IP address and RMI port of `LoadGen` are defined as the two input parameters of the `start_load.sh` script. 
 
-```
+```bash
 cd /INFless/workload
 vi start_load.sh
 loadGen_ip=$1
@@ -28,7 +28,7 @@ java -jar LoadGenSimClient.jar 250 1 9 1800 16 0 false /INFless/workload/Periodi
 java -jar LoadGenSimClient.jar 350 1 9 1800 14 0 false /INFless/workload/Periodic.txt /INFless/workload/results/ $1 $2 &
 ```
 Suppose that the `LoadGen` is deployed in one server with 192.168.3.130. To use it, start the workload generator with the following commands. 
-```
+```bash
 cd /INFless/workload
 sh start_load.sh 192.168.3.130 22222
 ```

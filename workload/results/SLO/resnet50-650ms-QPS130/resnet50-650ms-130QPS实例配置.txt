@@ -1,0 +1,9 @@
+pod/resnet50-n1-t2-g-1-s0-m0-b1-qx2-qi1-0513380710      1/1     Running   0          40m
+pod/resnet50-n1-t2-g-1-s0-m0-b1-qx2-qi1-9684783933      1/1     Running   0          33m
+pod/resnet50-n1-t2-g1-s10-m19-b2-qx12-qi4-6341207352    1/1     Running   0          34m
+pod/resnet50-n1-t2-g1-s20-m19-b4-qx16-qi9-4590731198    1/1     Running   0          33m
+pod/resnet50-n1-t2-g2-s10-m19-b2-qx12-qi4-2180984335    1/1     Running   0          39m
+pod/resnet50-n1-t4-g1-s10-m19-b4-qx14-qi10-5885810230   1/1     Running   0          34m
+pod/resnet50-n1-t8-g0-s50-m19-b8-qx25-qi23-4809688760   1/1     Running   0          39m
+pod/resnet50-n1-t8-g0-s50-m19-b8-qx25-qi23-8095988658   1/1     Running   0          39m
+pod/resnet50-n1-t8-g2-s50-m19-b8-qx25-qi23-2524725726   1/1     Running   0          39m

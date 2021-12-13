@@ -10,11 +10,11 @@ functions:
     qpsPerInstance: 300
     limits:
       memory: 2048Mi
-      gpu_memory: 0.4
+      gpu_memory: 0.2
       #gpu: 1
     requests:
       memory: 2048Mi
-      gpu_memory: 0.4
+      gpu_memory: 0.2
       #gpu: 1
     #constraints:
      #- "kubernetes.io/hostname=kube-node-2"
@@ -24,7 +24,7 @@ functions:
       #com.openfaas.scale.min: 1
       #com.openfaas.scale.max: 8
     environment:
-      MODEL_NAME: resnet
+      MODEL_NAME: resnet-50
       MODEL_BASE_PATH: /home/app/function/models
       BATCH_BASE_PATH: /home/app/function/batches
       #BATCH_SIZE: 4

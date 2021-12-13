@@ -1,0 +1,17 @@
+textcnn-69 2 0 1 15
+textcnn-69 2 0 2 12
+textcnn-69 2 0 4 22.5
+textcnn-69 2 0 8 39
+textcnn-69 2 0 16 52.5
+textcnn-69 2 0 32 117
+textcnn-69 4 0 4 13.5
+textcnn-69 4 0 8 28.5
+textcnn-69 4 0 16 33
+textcnn-69 4 0 32 84
+textcnn-69 8 0 8 13.5
+textcnn-69 8 0 16 24
+textcnn-69 8 0 32 58.5
+textcnn-69 12 0 16 18.84
+textcnn-69 12 0 32 42.945
+textcnn-69 16 0 16 13.785
+textcnn-69 16 0 32 32.715
