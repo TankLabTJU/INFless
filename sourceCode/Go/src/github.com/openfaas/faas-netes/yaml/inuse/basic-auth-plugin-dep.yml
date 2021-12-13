@@ -4,32 +4,32 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: openfaas
-    component: basic-auth-plugin
-  name: basic-auth-plugin
-  namespace: "openfaas"
+    app: openfaasdev
+    component: basic-auth-plugindev
+  name: basic-auth-plugindev
+  namespace: "openfaasdev"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: basic-auth-plugin
+      app: basic-auth-plugindev
   template:
     metadata:
       annotations:
         prometheus.io.scrape: "false"
       labels:
-        app: basic-auth-plugin
+        app: basic-auth-plugindev
     spec:
       volumes:
       - name: auth
         secret:
           secretName: basic-auth
       containers:
-      - name:  basic-auth-plugin
+      - name:  basic-auth-plugindev
         resources:
             requests:
-              cpu: 20m
-              memory: 50Mi
+              cpu: 2000m
+              memory: 4096Mi
             
         image: openfaas/basic-auth-plugin:0.17.0
         imagePullPolicy: IfNotPresent
@@ -60,5 +60,4 @@ spec:
           containerPort: 8080
           protocol: TCP
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
-        
+        kubernetes.io/hostname: kube-master

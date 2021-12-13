@@ -3,24 +3,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: openfaas
-    component: gateway
-  name: gateway
-  namespace: "openfaas"
+    app: openfaasdev
+    component: gatewaydev
+  name: gatewaydev
+  namespace: "openfaasdev"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: gatewaydev
   template:
     metadata:
       annotations:
         prometheus.io.scrape: "true"
-        prometheus.io.port: "8082"
+        prometheus.io.port: "8182"
       labels:
-        app: gateway
+        app: gatewaydev
     spec:
-      serviceAccountName: faas-controller
+      serviceAccountName: faas-controllerdev
       volumes:
       - name: faas-netes-temp-volume
         emptyDir: {}
@@ -31,28 +31,25 @@ spec:
         secret:
           secretName: basic-auth
       containers:
-      - name: gateway
+      - name: gatewaydev
         resources:
             requests:
-              cpu: 50m
-              memory: 120Mi
+              memory: 4096Mi
             
-        image: openfaas/gateway:latest
+        image: openfaas/gateway:latest-dev
         imagePullPolicy: IfNotPresent
         securityContext:
           readOnlyRootFilesystem: true
           runAsUser: 10001
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          timeoutSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 8080
-          timeoutSeconds: 5
         env:
+        - name: faas_prometheus_port
+          value: "9190"
+        - name: faas_prometheus_host
+          value: "prometheusdev"
+        - name: gateway_tcp_port
+          value: "8180"
+        - name: metrics_server_port
+          value: "8182"
         - name: read_timeout
           value: "65s"
         - name: write_timeout
@@ -60,15 +57,17 @@ spec:
         - name: upstream_timeout
           value: "60s"
         - name: functions_provider_url
-          value: "http://127.0.0.1:8081/"
+          value: "http://127.0.0.1:8181/"
         - name: direct_functions
-          value: "true"
+          value: "false"
         - name: direct_functions_suffix
-          value: "openfaas-fn.svc.cluster.local"
+          value: "openfaasdev-fn.svc.cluster.local"
         - name: function_namespace
-          value: "openfaas-fn"
+          value: "openfaasdev-fn"
+        - name: use_nats
+          value: "false"
         - name: faas_nats_address
-          value: "nats.openfaas.svc.cluster.local"
+          value: "nats.openfaasdev.svc.cluster.local"
         - name: faas_nats_port
           value: "4222"
         - name: faas_nats_channel
@@ -78,7 +77,7 @@ spec:
         - name: secret_mount_path
           value: "/var/secrets"
         - name: auth_proxy_url
-          value: "http://basic-auth-plugin.openfaas:8080/validate"
+          value: "http://basic-auth-plugindev.openfaasdev:8080/validate"
         - name: auth_pass_body
           value: "false"
         - name: scale_from_zero
@@ -93,24 +92,27 @@ spec:
           mountPath: "/var/secrets"
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 8180
           protocol: TCP
-      - name: faas-netes
+      - name: faas-netesdev
         resources:
             requests:
-              cpu: 50m
-              memory: 120Mi
+              memory: 8192Mi
             
-        image: openfaas/faas-netes:latest
+        image: openfaas/faas-netes:latest-dev
         imagePullPolicy: IfNotPresent
         securityContext:
           readOnlyRootFilesystem: true
           runAsUser: 10001
         env:
         - name: port
-          value: "8081"
+          value: "8181"
+        - name: faas_loadgen_port
+          value: "8080"
+        - name: faas_loadgen_host
+          value: "192.168.1.109"
         - name: function_namespace
-          value: "openfaas-fn"
+          value: "openfaasdev-fn"
         - name: read_timeout
           value: "60s"
         - name: write_timeout
@@ -118,29 +120,16 @@ spec:
         - name: image_pull_policy
           value: "IfNotPresent"
         - name: http_probe
-          value: "true"
+          value: "false"
         - name: set_nonroot_user
           value: "false"
-        - name: readiness_probe_initial_delay_seconds
-          value: "2"
-        - name: readiness_probe_timeout_seconds
-          value: "1"
-        - name: readiness_probe_period_seconds
-          value: "2"
-        - name: liveness_probe_initial_delay_seconds
-          value: "2"
-        - name: liveness_probe_timeout_seconds
-          value: "1"
-        - name: liveness_probe_period_seconds
-          value: "2"
         volumeMounts:
         - mountPath: /tmp
           name: faas-netes-temp-volume
         - mountPath: /home/app/yaml
           name: cluster-config
         ports:
-        - containerPort: 8081
+        - containerPort: 8181
           protocol: TCP
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
-        
+        kubernetes.io/hostname: kube-master

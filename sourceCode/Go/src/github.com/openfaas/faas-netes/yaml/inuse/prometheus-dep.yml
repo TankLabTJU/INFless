@@ -4,70 +4,64 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: openfaas
-    component: prometheus
-  name: prometheus
-  namespace: "openfaas"
+    app: openfaasdev
+    component: prometheusdev
+  name: prometheusdev
+  namespace: "openfaasdev"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prometheus
+      app: prometheusdev
   template:
     metadata:
       labels:
-        app: prometheus
+        app: prometheusdev
       annotations:
         sidecar.istio.io/inject: "true"
         checksum/prometheus-config: "5f85c869a5fc3977ddcfbfb0461070c08d48af2510eb4da93e8fb55209d57461"
     spec:
-      serviceAccountName: faas-prometheus
+      serviceAccountName: clusterdev-prometheus
       containers:
-      - name: prometheus
+      - name: prometheusdev
         resources:
             requests:
-              memory: 512Mi
+              memory: 16384Mi
             
         image: prom/prometheus:v2.11.0
         command:
           - "prometheus"
           - "--config.file=/etc/prometheus/prometheus.yml"
-        imagePullPolicy: Always
+          - "--web.listen-address=:9190"
+        imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
             path: /-/healthy
-            port: 9090
+            port: 9190
           timeoutSeconds: 30
         readinessProbe:
           httpGet:
             path: /-/healthy
-            port: 9090
+            port: 9190
           timeoutSeconds: 30
         ports:
-        - containerPort: 9090
+        - containerPort: 9190
           protocol: TCP
         volumeMounts:
         - mountPath: /etc/prometheus/prometheus.yml
-          name: prometheus-config
+          name: prometheusdev-config
           subPath: prometheus.yml
-        - mountPath: /etc/prometheus/alert.rules.yml
-          name: prometheus-config
-          subPath: alert.rules.yml
         - mountPath: /prometheus/data
           name: prom-data
       volumes:
-        - name: prometheus-config
+        - name: prometheusdev-config
           configMap:
-            name: prometheus-config
+            name: prometheusdev-config
             items:
               - key: prometheus.yml
                 path: prometheus.yml
                 mode: 0644
-              - key: alert.rules.yml
-                path: alert.rules.yml
-                mode: 0644
         - name: prom-data
           emptyDir: {}
       nodeSelector:
-        beta.kubernetes.io/arch: amd64
-        
+        kubernetes.io/hostname: kube-master
