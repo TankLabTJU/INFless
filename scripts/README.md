@@ -1,35 +1,82 @@
-# Source Code for INFless
-INFless is a domain-specific serverless platform. It caters to AI inference as BaaS offerings. Function developers can submit their inference source code to INFless; INFless accepts the function code of inference models and automates the deployment and scaling under varying access workloads; Users can get AI services from INFless. INFless guarantees subsecond latency for user requests and achieves high resource efficiency through the elaborately designed resource allocation and function management mechanisms. The current design of INFless relies on docker container for resource management and isolation among inference services, and it runs on Kuberneter cluster.
- 
-## Contents
-- sourceCode: The source code of INFless for implementation and evaluation
-- configuration: The cluster configuration file that needs to be loaded when INFless launches
-- developer: The inference functions that could be deployed into INFless
-- models: The metadata of inference models evaluated in INFless
-- profiler: The model performance-resource profiles 
-- workload: The function workload trace used for evaluation
-- scripts: Some scripts used in the evaluation
 
-## INFless Installation
-Deployment guide of INFless for Kubernetes is available here: https://github.com/tjulym/INFless/sourceCode/README.md
+# Instructions
+The following steps will reproduce the results in Figure 11 (system throuhgput comparison between INFless and its baseline).
+## 1. Login the test environment
+We have configured a SSH reverse proxy between one public cloud server and the physical machine in our private cluster, which has already deployed the `INFless` system and workload functions. Please login the public server using the following command,
+```bash
+# Try to login the public server
+$ ssh root@47.106.209.124
+Password: Pangu2020
+```
+After you login the public server, please access our private machine using the following commands,
 
-Notice: INFless is fully implemented with OpenFaaS, which is a serverless frameworks built with Kubernetes. The installation of INFless is similar as OpenFaaS, and we recommend you have some preliminary knowledges about OpenFaaS and understand how it works with Kubernetes. The Deployment guide of OpenFaaS for Kubernetes is available here: https://docs.openfaas.com/deployment/kubernetes/.
+```bash
+# Successfully login the public server and try to login the private server
+$ ssh tank@localhost -p 8387
+Password: tanklab
+```
+After that, you should turn into the directory of `INFless` project and follow the subsequent instructions to reproduce the experimental results.
+```bash
+# Successfully login the private server and turn into INFless workspace
+$ cd /home/tank/1_yanan/INFless/ 
+$ ls
+configuration  LICENSE  profiler   scripts     workload
+developer      models   README.md  sourceCode
+```
 
-## Inference Function Deployment
-Guidance for function developer is available here: https://github.com/tjulym/INFless/developer/README.md
+## 2. Build INFless and Deploy functions
+INFless has been deployed on the private machine. Please check its running state using the following commands,
+```bash
+# You should firstly switch to the root user
+$ sudo su
+  [sudo] password for tank: tanklab
+# List the components of INFless
+$ kubectl get all -n openfaasdev 
+NAME                                               READY   STATUS             RESTARTS   AGE
+pod/basic-auth-plugindev-6bbffdd8c7-q8swp          1/1     Running            0          13h
+pod/cpuagentcontroller-deploy-0-6687bc6f4b-47j57   0/1     Pending            0          13h
+pod/cpuagentcontroller-deploy-1-75588ccd9b-9kg8x   0/1     Pending            0          13h
+pod/gatewaydev-bdb695ff4-rpnjp                     2/2     Running            0          13h
+pod/prometheusdev-7cb4464767-kf7v5                 1/1     Running            0          13h
+...
 
-Notice: Once INFless is deployed successfully, developers could use faasdev-cli tools to upload their inference functions and build them as FaaS service. 
-## Load Generator Installation
-Guidance is available here: https://github.com/tjulym/INFless/sourceCode/Java/README.md
+# List the deployed inference functions in INFless
+$ kubectl get all -n openfaasdev-fn
+NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/mobilenet   ClusterIP   10.102.207.241   <none>        8080/TCP   2m5s
+service/resnet-50   ClusterIP   10.97.239.55     <none>        8080/TCP   2m17s
+service/ssd         ClusterIP   10.102.74.237    <none>        8080/TCP   2m11s
+```
+  
+## 3. Start Workload Generator
+Start the load generator using the following command,
 
-Notice: Be sure that the deployed inference functions and workload generator work well before evaluating INFless platform.
-## Evaluation
+```bash
+$ cd /home/tank/1_yanan/INFless/workload/
+# stop the workload 
+$ jps -l |grep Load |awk '{print $1}' |xargs kill -9
+# start the workload
+$ sh start_load.sh 192.168.1.109 22222
+```
+> Notice: The `start_load.sh` will run as a daemon and print some log. Please start a new terminal to run the commands in step 4.
 
-The plotting source code is available here: https://github.com/tjulym/INFless/sourceCode/Matlab/README.md
+## 4. Collect the system log and Check result
 
+The following commands will collect INFless's runtime log and parse the results for system throughput comparison between `INFless` and its baseline (`BATCH`). 
+```bash
+# parse results 
+$ cd /home/tank/1_yanan/INFless/workload
+$ sh collect_result.sh
+prefixPath:/home/tank/1_yanan/INFless/workload/
+Baseline: BATCH
+Total statistics QPS:54084
+Scaling Efficiency: 0.5156927583326659
+Throughput Efficiency: 8.112629432619582E-4
+---------------------------
+Baseline: INFless
+Total statistics QPS:11967
+Scaling Efficiency: 0.8333333333333334
+Throughput Efficiency: 0.0019974242290713607
+```
 
-##  Bug report & Question 
-We have test the deployment guidances and fixed some bugs that have been found. If you have some questions about the reproduction process, please contact us via Email: ynyang@tju.edu.cn
-
-## Reference
-[1] Yanan Yang, Laiping Zhao, Yiming Li, Huanyu Zhang, Jie Li, Mingyang Zhao, Xingzhen Chen, Keqiu Li. INFless: A Native Serverless System for Low-latency, High-throughput Inference. The 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS'22), Lausanne, Switzerland. Feb 2022.
+The result shows that `INFless` achieves 2.5x higher throughput than BATCH as in Figure 11 (0.0019 v.s. 0.0008).
