@@ -12,23 +12,22 @@ The source code of INFless implementation and evaluation consists of three parts
 
 
 # Instructions
-We provide the steps to build and launch INFless system as below:
-## 1. Prepare the test environment.
-There are two ways to choose:
-1. Using the remote test environment in our private cluster. We have configured a SSH reverse proxy between one public cloud server and the physical machine in our private cluster, which allows you to access the test environment through the public server. To do it, you should firstly login the public server.
+The following steps will reproduce the results in Figure 11 (system throuhgput comparison between INFless and its baseline).
+## 1. Login the test environment
+We have configured a SSH reverse proxy between one public cloud server and the physical machine in our private cluster, which has already deployed the `INFless` system and workload functions. Please login the public server using the following command,
 ```bash
 # Try to login the public server
 $ ssh root@47.106.xxx.xxx
-Password: xxxx
+Password: xxx
 ```
-When you login the public server successfully, you should then  access our private machine.
+After you login the public server, please access our private machine using the following commands,
 
 ```bash
 # Successfully login the public server and try to login the private server
 $ ssh tank@localhost -p 8387
-Password: xxxx
+Password: xxx
 ```
-After that, you should turn into the directory of INFless project and follows the subsequent instructions on Github.
+After that, you should turn into the directory of `INFless` project and follow the subsequent instructions to reproduce the experimental results.
 ```bash
 # Successfully login the private server and turn into INFless workspace
 $ cd /home/tank/1_yanan/INFless/ 
@@ -36,111 +35,60 @@ $ ls
 configuration  LICENSE  profiler   scripts     workload
 developer      models   README.md  sourceCode
 ```
-2. For anther way, we recommend you to prepare the specified hardwares in a local bare-metal server cluster, and follow the instructions for building and running the system. The detailed documents are available on Github. 
- 
-## 2. Build and launch INFless framework
-INFless is fully implemented within OpenFaaS, which is a FaaS platform runs on Kubernetes. To install INFless, firstly, you should compile and build the docker images for each component. Using the following commands to compile codes for faasdev-cli, faas-gateway and faas-netes.
-``` bash
-# build faasdev-cli
-$ cd sourceCode/Go/src/github.com/openfaas/
-$ ls
-faas  faas-cli  faas-idler  faas-netes
 
-# build faasdev-cli
-$ cd INFless/sourceCode/Go/src/github.com/openfaas/faas-cli
-$ make 
-$ cp faasdev-cli /usr/local/bin 
-$ chmod 777 /usr/local/bin/faasdev-cli 
-
-# build gateway
-$ cd INFless/sourceCode/Go/src/github.com/openfaas/faas/gateway
-$ make
-
-# build faas-netes
-$ cd INFless/sourceCode/Go/src/github.com/openfaas/faas-netes
-$ kubectl create -f namespace.yml
-$ make
-```
-The prepared image list should be like this:
-``` bash
-$ docker images |grep dev
-openfaas/faas-netes  latest-dev  8f76822ab420   2 days ago   65.6MB
-openfaas/gateway     latest-dev  ce08c7020a45   12 days ago  30MB
-openfaas/faas-cli    latest-dev  2e71371d741a   7 weeks ago  31.2MB
-```
-Then, deploy the INFless system on top of Kubernetes cluster.
+## 2. Build INFless and Deploy functions
+INFless has been deployed on the private machine. Please check its running state using the following commands,
 ```bash
-# cluster configuration files
-$ cd INFless/sourceCode/Go/src/github.com/openfaas/faas-netes
-$ cp yml/clusterCapConfig-dev.yml /root/yaml
-
-# model profiler files
-$ mkdir /root/yaml
-$ cd INFless/
-$ cp -r profiler/ /root/yaml/
-
-# create namespace
-$ kubectl create -f namespace.yml
-# create basic-auth secret
-$ kubectl -n openfaasdev create secret generic basic-auth \
---from-literal=basic-auth-user=admin \
---from-literal=basic-auth-password=admin
-
-# deploy components
-$ kubectl delete -f yml/inuse
-$ kubectl apply -f yml/inuse
-```
-
-## 3. Deploy infererence functions
-The inference model files are stored in directory of `INFless/developer/servingFunctions/`
-```bash
-$ cd INFless/developer/servingFunctions/
-# ssd, latency target 300ms
-$ faasdev-cli build -f ssd.yml
-$ faasdev-cli deploy -f ssd.yml
-# mobilenet, latency target 200ms
-$ faasdev-cli build -f mobilenet.yml
-$ faasdev-cli deploy -f mobilenet.yml
-# resnet-50, latency target 300ms
-$ faasdev-cli build -f resnet-50.yml
-$ faasdev-cli deploy -f resnet-50.yml
-```
-The compiled inference function images could be found like this:
-```bash
-$ docker images
-ssd  latest  b4f9dfe26b21        8 seconds ago       2.53GB
-mobilenet  latest  689b99383100        8 seconds ago       2.53GB
-resnet-50  latest  15e0e02ce887        8 seconds ago       2.53GB
+# You should firstly switch to the root user
+$ sudo su
+  [sudo] password for tank: tanklab
+# List the components of INFless
+$ kubectl get all -n openfaasdev 
+NAME                                               READY   STATUS             RESTARTS   AGE
+pod/basic-auth-plugindev-6bbffdd8c7-q8swp          1/1     Running            0          13h
+pod/cpuagentcontroller-deploy-0-6687bc6f4b-47j57   0/1     Pending            0          13h
+pod/cpuagentcontroller-deploy-1-75588ccd9b-9kg8x   0/1     Pending            0          13h
+pod/gatewaydev-bdb695ff4-rpnjp                     2/2     Running            0          13h
+pod/prometheusdev-7cb4464767-kf7v5                 1/1     Running            0          13h
 ...
-```
 
-## 4. Start workload Generator
-Make sure that the `LoadGen` has been deployed in `192.168.1.109` node successfully.
+# List the deployed inference functions in INFless
+$ kubectl get all -n openfaasdev-fn
+NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/mobilenet   ClusterIP   10.102.207.241   <none>        8080/TCP   2m5s
+service/resnet-50   ClusterIP   10.97.239.55     <none>        8080/TCP   2m17s
+service/ssd         ClusterIP   10.102.74.237    <none>        8080/TCP   2m11s
+```
+  
+## 3. Start Workload Generator
+Start the load generator using the following command,
 
 ```bash
+$ cd /home/tank/1_yanan/INFless/workload/
+# stop the workload 
+$ jps -l |grep Load |awk '{print $1}' |xargs kill -9
 # start the workload
-$ cd INFless/workload/
-$ sh start_load.sh 192.168.109 22222
+$ sh start_load.sh 192.168.1.109 22222
 ```
-## 5. Collect the system log and check result
-The INFless's runtime log can be found with `kubectl logs` command. 
-```bash
-# check the pod name of gateway component
-$ kubectl get all -n openfaasdev |grep pod/gatewaydev
-pod/gatewaydev-bdb695ff4-jdk67    2/2   Running     0    46m
-# output the log to result file
-$ kubectl logs pod/gatewaydev-bdb695ff4-jdk67 -n openfaasdev faas-netesdev >> faasnetes_result.log
+> Notice: The `start_load.sh` will run as a daemon and print some log. Please start a new terminal to run the commands in step 4.
 
+## 4. Collect the system log and Check result
+
+The following commands will collect INFless's runtime log and parse the results for system throughput comparison between `INFless` and its baseline (`BATCH`). 
+```bash
 # parse results 
+$ cd /home/tank/1_yanan/INFless/workload
 $ sh collect_result.sh
 prefixPath:/home/tank/1_yanan/INFless/workload/
 Baseline: BATCH
 Total statistics QPS:54084
-Scaling Efficiency: 0.7703670379310474
-Throughput Efficiency: 0.0012119042210415895
+Scaling Efficiency: 0.5156927583326659
+Throughput Efficiency: 8.112629432619582E-4
 ---------------------------
 Baseline: INFless
 Total statistics QPS:11967
 Scaling Efficiency: 0.8333333333333334
 Throughput Efficiency: 0.0019974242290713607
 ```
+
+The result shows that `INFless` achieves 2.5x higher throughput than BATCH as in Figure 11 (0.0019 v.s. 0.0008).
