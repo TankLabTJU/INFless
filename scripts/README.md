@@ -5,15 +5,15 @@ The following steps will reproduce the results in Figure 11 (system throuhgput c
 We have configured a SSH reverse proxy between one public cloud server and the physical machine in our private cluster, which has already deployed the `INFless` system and workload functions. Please login the public server using the following command,
 ```bash
 # Try to login the public server
-$ ssh root@47.106.209.124
-Password: Pangu2020
+$ ssh root@47.106.xxx.xxx
+Password: xxx
 ```
 After you login the public server, please access our private machine using the following commands,
 
 ```bash
 # Successfully login the public server and try to login the private server
 $ ssh tank@localhost -p 8387
-Password: tanklab
+Password: xxx
 ```
 After that, you should turn into the directory of `INFless` project and follow the subsequent instructions to reproduce the experimental results.
 ```bash
