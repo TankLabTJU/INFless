@@ -13,7 +13,7 @@ After you login the public server, please access our private machine using the f
 ```bash
 # Successfully login the public server and try to login the private server
 $ ssh tank@localhost -p 8387
-Password: xxx
+Password: tanklab
 ```
 After that, you should turn into the directory of `INFless` project and follow the subsequent instructions to reproduce the experimental results.
 ```bash
