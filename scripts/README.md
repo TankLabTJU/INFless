@@ -69,14 +69,14 @@ $ cd /home/tank/1_yanan/INFless/workload
 $ sh collect_result.sh
 prefixPath:/home/tank/1_yanan/INFless/workload/
 Baseline: BATCH
-Total statistics QPS:54084
-Scaling Efficiency: 0.5156927583326659
-Throughput Efficiency: 8.112629432619582E-4
+Total statistics QPS:52810
+Scaling Efficiency: 0.498
+Throughput Efficiency: 8.23954E-4
 ---------------------------
 Baseline: INFless
-Total statistics QPS:11967
-Scaling Efficiency: 0.8333333333333334
-Throughput Efficiency: 0.0019974242290713607
+Total statistics QPS:12068
+Scaling Efficiency: 0.8135
+Throughput Efficiency: 0.001874
 ```
 
-The result shows that `INFless` achieves 2.5x higher throughput than BATCH as in Figure 11 (0.0019 v.s. 0.0008).
+The result shows that `INFless` achieves >2x higher throughput than BATCH as in Figure 11 (0.001987v.s. 0.00082).
