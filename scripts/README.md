@@ -24,12 +24,30 @@ configuration  LICENSE  profiler   scripts     workload
 developer      models   README.md  sourceCode
 ```
 
-## 2. Build INFless and Deploy functions
-INFless has been deployed on the private machine. Please check its running state using the following commands,
+## 2. Build and launch INFless framework
+INFless is fully implemented within OpenFaaS, which is a FaaS platform runs on Kubernetes. To install INFless, firstly, you should compile and build the docker images for each component. Using the following commands to compile codes for faasdev-cli, faas-gateway and faas-netes.
 ```bash
 # You should firstly switch to the root user
 $ sudo su
   [sudo] password for tank: tanklab
+  
+# Compile and install INFless
+$ cd /home/tank/1_yanan/INFless/sourceCode/Go/src/github.com/openfaas/
+$ ls
+faas  faas-cli  faas-idler  faas-netes
+
+# Compile gateway
+$ cd /home/tank/1_yanan/INFless/sourceCode/Go/src/github.com/openfaas/faas/gateway
+$ make
+
+# Compile faas-netes
+$ cd /home/tank/1_yanan/INFless/sourceCode/Go/src/github.com/openfaas/faas-netes
+$ make
+
+# Install INFless on Kubernetes
+$ cd /home/tank/1_yanan/INFless/sourceCode/Go/src/github.com/openfaas/faas-netes
+$ kubectl apply -f yaml/
+
 # List the components of INFless
 $ kubectl get all -n openfaasdev 
 NAME                                               READY   STATUS             RESTARTS   AGE
@@ -39,8 +57,22 @@ pod/cpuagentcontroller-deploy-1-75588ccd9b-9kg8x   0/1     Pending            0 
 pod/gatewaydev-bdb695ff4-rpnjp                     2/2     Running            0          13h
 pod/prometheusdev-7cb4464767-kf7v5                 1/1     Running            0          13h
 ...
+```
+## 3. Deploy infererence functions
+The inference model files are stored in directory of `/home/tank/1_yanan/INFless/developer/servingFunctions/`
+```bash
+$ source /etc/profile
+$ cd /home/tank/1_yanan/INFless/developer/servingFunctions/
+# ssd, latency target 300ms
+$ faasdev-cli deploy -f ssd.yml
+# mobilenet, latency target 200ms
+$ faasdev-cli deploy -f mobilenet.yml
+# resnet-50, latency target 300ms
+$ faasdev-cli deploy -f resnet-50.yml
+```
+The deployed inference functions can be listed as follows:
+```
 
-# List the deployed inference functions in INFless
 $ kubectl get all -n openfaasdev-fn
 NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 service/mobilenet   ClusterIP   10.102.207.241   <none>        8080/TCP   2m5s
@@ -48,7 +80,7 @@ service/resnet-50   ClusterIP   10.97.239.55     <none>        8080/TCP   2m17s
 service/ssd         ClusterIP   10.102.74.237    <none>        8080/TCP   2m11s
 ```
   
-## 3. Start Workload Generator
+## 4. Start Workload Generator
 Start the load generator using the following command,
 
 ```bash
@@ -60,7 +92,7 @@ $ sh start_load.sh 192.168.1.109 22222
 ```
 > Notice: The `start_load.sh` will run as a daemon and print some log. Please start a new terminal to run the commands in step 4.
 
-## 4. Collect the system log and Check result
+## 5. Collect the system log and Check result
 
 The following commands will collect INFless's runtime log and parse the results for system throughput comparison between `INFless` and its baseline (`BATCH`). 
 ```bash
@@ -79,4 +111,4 @@ Scaling Efficiency: 0.8135
 Throughput Efficiency: 0.001874
 ```
 
-The result shows that `INFless` achieves >2x higher throughput than BATCH as in Figure 11 (0.00187v.s. 0.00082).
+The result shows that `INFless` achieves >2x higher throughput than BATCH as in Figure 11 (0.00187 v.s. 0.00082).
