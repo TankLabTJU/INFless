@@ -79,4 +79,4 @@ Scaling Efficiency: 0.8135
 Throughput Efficiency: 0.001874
 ```
 
-The result shows that `INFless` achieves >2x higher throughput than BATCH as in Figure 11 (0.001987v.s. 0.00082).
+The result shows that `INFless` achieves >2x higher throughput than BATCH as in Figure 11 (0.00187v.s. 0.00082).
